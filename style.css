@@ -11,6 +11,85 @@ body[theme="black"]{
     background-color: black;
 }
 
-nav{
-    position: fixed;
+
+.nav-bottom{
+    transition: all ease 0.65s;
+}
+
+.nav-2 h4{
+    margin-bottom: 2vw;
+}
+
+.nav-2 h5{
+    margin-bottom: 1vw;
+    /* background-color: red; */
+    opacity: 0;
+    overflow: hidden;
+}
+
+.nav-2 h5 span{
+    display: inline-block;
+    transform: translateY(25px);
+}
+
+.page1{
+    min-height: 100vh;
+}
+
+.moving-img{
+    white-space: nowrap;
+}
+
+.moving-img .move{
+    /* display: inline-block; */
+    animation-name: move;
+    animation-duration: 9s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes move {
+    0%{
+        transform: translateX(0);
+    }
+    100%{
+        transform: translateX(-220%);
+    }
+}
+
+.moving-img .blur{
+    background: linear-gradient(to right,black,black);
+    z-index: 9;
+}
+
+.page2{
+    padding: 2vw 7vw;
+}
+
+.page3{
+    background-image: url(https://lazarev.kiev.ua/la24/reel-cover.webp);
+    background-size: cover;
+}
+
+.page3 i{
+    color: black;
+    font-size: 4vw;
+}
+
+.page3-center h5{
+    transition: all ease 0.5s;
+    transform: translateY(15%);
+}
+
+.page3-center:hover h5{
+    opacity: 1;
+    transform: translateY(0%);
+}
+
+.page3 video{
+    transform: scaleX(0.7) scaleY(0);
+    opacity: 0;
+    border-radius: 30px;
+    color: grey;
+    
 }
