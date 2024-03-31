@@ -178,3 +178,54 @@ document.querySelector(".page5").innerHTML = clutter;
 }
 
 blogs();
+
+
+
+var page6video = document.querySelectorAll(".right-side");
+
+page6video.forEach(function(elem){
+    elem.addEventListener("mouseenter", function(){
+        elem.childNodes[3].style.opacity = 1;
+        elem.childNodes[3].play()
+    })
+    elem.addEventListener("mouseleave", function(){
+        elem.childNodes[3].style.opacity = 0;
+        elem.childNodes[3].load()
+    })
+})
+
+
+
+
+var cards_page8 = [
+    {heading:"Web3", para:"We help long-standing companies reshape and amplify their positions by implementing Web3 technologies. As well as we collaborate with emerging startups to launch innovative web3 products that make a splash in the market"},
+    {heading:"E-commerce", para:"Partnering with with $10M+ revenue brands, we expertly scale and solve their business challenges, offering E-commerce website design &amp; development."},
+    {heading:"Real Estate", para:"We holistically advocate for a convenient user experience and design digital real estate websites to convey the physical world. By creating user-friendly digital design, we refine the way people perceive your property business"},
+    {heading:"FinTech ", para:"We design smart, in-demand financial solutions, delighting your audience with innovations in the finance sector. By putting end-users at the forefront and creating a high-end experience, we improve your business metrics"},
+    
+    {heading:"AI & ML", para:"Designing digital experience for an AI and ML product, we focus on creating unique differentiators to set your product apart. Our expertise lies in developing intuitive UX while also ensuring that the AI models perform optimally with minimal iterations"}
+
+];
+
+
+function page8card(){
+    var clutter = '';
+
+    cards_page8.forEach(function(product,idx){
+    clutter += `<div class="card h-[38vh] flex justify-between flex-col w-[25vw] bg-[#d5d3d3] text-black p-5">
+    <div class="flex justify-between text-2xl">
+        <h2>${product.heading}</h2>
+        <i class="text-3xl ri-arrow-right-up-line"></i>
+    </div>
+    <p class="flex flex-start text-[0.9vw]">
+       ${product.para}
+
+    </p>
+</div>`;
+
+})
+
+document.querySelector(".page8-card").innerHTML = clutter;
+}
+
+page8card();
