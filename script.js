@@ -1,49 +1,39 @@
-// var nav = document.querySelector("nav");
+function locoMotive(){
+    gsap.registerPlugin(ScrollTrigger);
 
-// nav.addEventListener("mouseenter", function(){
- 
+// Using Locomotive Scroll from Locomotive https://github.com/locomotivemtl/locomotive-scroll
 
-//     tl.to(".nav-bottom h5 span",{
-//         opacity:1,
-//         delay:1,
-//         y:-30,
-        // stagger:{
-        //     amount:0.7
-        // }
-//     })
+const locoScroll = new LocomotiveScroll({
+  el: document.querySelector(".main"),
+  smooth: true
+});
+// each time Locomotive Scroll updates, tell ScrollTrigger to update too (sync positioning)
+locoScroll.on("scroll", ScrollTrigger.update);
 
-//     tl.from(".nav-bottom h5 span",{
-        
-        
-//         stagger:{
-//             amount:0.7
-//         }
-//     })
+// tell ScrollTrigger to use these proxy methods for the ".main" element since Locomotive Scroll is hijacking things
+ScrollTrigger.scrollerProxy(".main", {
+  scrollTop(value) {
+    return arguments.length ? locoScroll.scrollTo(value, 0, 0) : locoScroll.scroll.instance.scroll.y;
+  }, // we don't have to define a scrollLeft because we're only scrolling vertically.
+  getBoundingClientRect() {
+    return {top: 0, left: 0, width: window.innerWidth, height: window.innerHeight};
+  },
+  // LocomotiveScroll handles things completely differently on mobile devices - it doesn't even transform the container at all! So to get the correct behavior and avoid jitters, we should pin things with position: fixed on mobile. We sense it by checking to see if there's a transform applied to the container (the LocomotiveScroll-controlled element).
+  pinType: document.querySelector(".main").style.transform ? "transform" : "fixed"
+});
 
-// })
 
-// nav.addEventListener("mouseleave", function(){
-//     var tl = gsap.timeline()
+// each time the window updates, we should refresh ScrollTrigger and then update LocomotiveScroll. 
+ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
 
-//     tl.to(".nav-bottom",{
-//         bottom: "0%",
-//     })
+// after everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
+ScrollTrigger.refresh();
 
-//     tl.to(".nav-bottom h5 span",{
-//         opacity:0,
-        
-       
-//     })
 
-//     tl.from(".nav-bottom h5 span",{
-        
-//         y:-30,
-//         stagger:{
-//             amount:0.7
-//         }
-//     })
+}
 
-// })
+locoMotive();
+
 
 
 function navAnimation(){
@@ -212,7 +202,7 @@ function page8card(){
     var clutter = '';
 
     cards_page8.forEach(function(product,idx){
-    clutter += `<div class="card h-[38vh] flex justify-between flex-col w-[25vw] bg-[#d5d3d3] text-black p-5">
+    clutter += `<div class="card h-[38vh]  flex justify-between flex-col w-[25vw] bg-[#222] text-white p-5">
     <div class="flex justify-between text-2xl">
         <h2>${product.heading}</h2>
         <i class="text-3xl ri-arrow-right-up-line"></i>
@@ -229,3 +219,23 @@ document.querySelector(".page8-card").innerHTML = clutter;
 }
 
 page8card();
+
+
+function page9Animation(){
+    gsap.from("#btm9-part2 h4,#btm9-part3 h4,#btm9-part4 h4", {
+        x:0,
+        duration:1,
+        scrollTrigger:{
+            trigger:"#btm9-part2",
+            scroller:".main",
+            // markers:true,
+            start:"top 80%",
+            end:"top 10%",
+            scrub:2
+        }
+    
+    })
+}
+
+page9Animation();
+
