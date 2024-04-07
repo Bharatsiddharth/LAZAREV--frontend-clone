@@ -32,7 +32,7 @@ ScrollTrigger.refresh();
 
 }
 
-locoMotive();
+// locoMotive();
 
 
 
@@ -42,8 +42,8 @@ function navAnimation(){
     nav.addEventListener("mouseenter" , function(){
         var tl = gsap.timeline()
     
-        tl.to("nav,.nav-bottom",{
-            bottom: "-180%",
+        tl.to("nav-2,.nav-bottom",{
+            bottom: "-170%",
         })
         tl.to(".nav-2 h5",{
             opacity:1,
@@ -82,7 +82,7 @@ function navAnimation(){
     }
 
 
-// navAnimation();
+navAnimation();
 
 function page2Animation(){
     let rightelem = document.querySelectorAll(".right-elem");
